@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean checkIfWin(ImageView turn_score) {
-        ImageView winIndex = findViewById(R.id.main_win_index);
+        ImageView winIndex = findViewById(R.id.main_win);
         if (matIndexes[0] != 0 && matIndexes[0] == matIndexes[1] && matIndexes[1] == matIndexes[2]) {
             checkWhoWin(0,turn_score);
             //winIndex.setImageResource(R.drawable.xwin);
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         }
         if (matIndexes[0] != 0 && matIndexes[0] == matIndexes[4] && matIndexes[4] == matIndexes[8]) {
             checkWhoWin(0,turn_score);
-            winIndex.setImageResource(R.drawable.xplay);
+            winIndex.setImageResource(R.drawable.mark1);
             return true;
         }
         if (matIndexes[2] != 0 && matIndexes[2] == matIndexes[4] && matIndexes[4] == matIndexes[5]) {
