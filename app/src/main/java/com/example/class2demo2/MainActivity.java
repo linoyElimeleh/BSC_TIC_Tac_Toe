@@ -43,32 +43,32 @@ public class MainActivity extends AppCompatActivity {
         ImageView winIndex = findViewById(R.id.main_win);
         if (matIndexes[0] != 0 && matIndexes[0] == matIndexes[1] && matIndexes[1] == matIndexes[2]) {
             checkWhoWin(0,turn_score);
-            //winIndex.setImageResource(R.drawable.xwin);
+            winIndex.setImageResource(R.drawable.mark3turn);
             return true;
         }
         if (matIndexes[3] != 0 && matIndexes[3] == matIndexes[4] && matIndexes[4] == matIndexes[5]) {
             checkWhoWin(3,turn_score);
-            //log the winner and win location
+            winIndex.setImageResource(R.drawable.mark4turn);
             return true;
         }
         if (matIndexes[6] != 0 && matIndexes[6] == matIndexes[7] && matIndexes[7] == matIndexes[8]) {
             checkWhoWin(6,turn_score);
-            //log the winner and win location
+            winIndex.setImageResource(R.drawable.mark5turn);
             return true;
         }
         if (matIndexes[0] != 0 && matIndexes[0] == matIndexes[3] && matIndexes[3] == matIndexes[6]) {
             checkWhoWin(0,turn_score);
-            //log the winner and win location
+            winIndex.setImageResource(R.drawable.mark3);
             return true;
         }
         if (matIndexes[1] != 0 && matIndexes[1] == matIndexes[4] && matIndexes[4] == matIndexes[7]) {
             checkWhoWin(1,turn_score);
-            //log the winner and win location
+            winIndex.setImageResource(R.drawable.mark4);
             return true;
         }
         if (matIndexes[2] != 0 && matIndexes[2] == matIndexes[5] && matIndexes[5] == matIndexes[8]) {
             checkWhoWin(2,turn_score);
-            //log the winner and win location
+            winIndex.setImageResource(R.drawable.mark5);
             return true;
         }
         if (matIndexes[0] != 0 && matIndexes[0] == matIndexes[4] && matIndexes[4] == matIndexes[8]) {
@@ -76,9 +76,9 @@ public class MainActivity extends AppCompatActivity {
             winIndex.setImageResource(R.drawable.mark1);
             return true;
         }
-        if (matIndexes[2] != 0 && matIndexes[2] == matIndexes[4] && matIndexes[4] == matIndexes[5]) {
+        if (matIndexes[2] != 0 && matIndexes[2] == matIndexes[4] && matIndexes[4] == matIndexes[6]) {
             checkWhoWin(2,turn_score);
-            //log the winner and win location
+            winIndex.setImageResource(R.drawable.mark2);
             return true;
         }
         return false;
