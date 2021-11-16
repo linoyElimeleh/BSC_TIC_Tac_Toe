@@ -6,19 +6,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-    int counter = 0;
-    int[] matIndexes = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    int turn = 0;
+    int counter=0;
+    int[] matIndexes;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public void start(){
+        matIndexes = new int[9];
         ImageView turn_score = findViewById(R.id.main_turn_score);
         turn_score.setImageResource(R.drawable.xplay);
         initializeListener(R.id.main_squre_00);
@@ -31,6 +32,23 @@ public class MainActivity extends AppCompatActivity {
         initializeListener(R.id.main_squre_21);
         initializeListener(R.id.main_squre_22);
     }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        start();
+        Button b = findViewById(R.id.main_button_newgame);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                turn = 0;
+                counter=0;
+                start();
+            }
+        });
+    }
+
     public void checkWhoWin(int index,ImageView turn_score) {
         if (matIndexes[index] == 1) {
             turn_score.setImageResource(R.drawable.xwin);
@@ -39,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public boolean checkIfWin(ImageView turn_score) {
+    public boolean checkIfFinish(ImageView turn_score) {
         ImageView winIndex = findViewById(R.id.main_win);
         if (matIndexes[0] != 0 && matIndexes[0] == matIndexes[1] && matIndexes[1] == matIndexes[2]) {
             checkWhoWin(0,turn_score);
@@ -81,19 +99,28 @@ public class MainActivity extends AppCompatActivity {
             winIndex.setImageResource(R.drawable.mark2);
             return true;
         }
+        if (counter==9){
+            turn_score.setImageResource(R.drawable.nowin);
+            return true;
+        }
         return false;
     }
 
+
     public void initializeListener(@IdRes int id) {
+        ImageView winIndex = findViewById(R.id.main_win);
         ImageView currentImg = findViewById(id);
         ImageView turn_score = findViewById(R.id.main_turn_score);
-        currentImg.setSelected(true);
+        currentImg.setSelected(false);
+        currentImg.setImageResource(R.drawable.empty);
+        winIndex.setImageResource(R.drawable.empty);
         currentImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (currentImg.isSelected()) {
+                counter++;
+                if (!currentImg.isSelected()) {
                     int index = Integer.parseInt(currentImg.getTag().toString()) - 1;
-                    if (counter % 2 == 0) {
+                    if (turn % 2 == 0) {
                         currentImg.setImageResource(R.drawable.x);
                         matIndexes[index] = 1;
                         turn_score.setImageResource(R.drawable.oplay);
@@ -102,11 +129,12 @@ public class MainActivity extends AppCompatActivity {
                         matIndexes[index] = 2;
                         turn_score.setImageResource(R.drawable.xplay);
                     }
-                    if (checkIfWin(turn_score)){
+                    if (checkIfFinish(turn_score)){
+                        Toast.makeText(getApplicationContext(),"game done",Toast.LENGTH_LONG).show();
                         System.out.println("You Win");
                     }
-                    counter++;
-                    currentImg.setSelected(false);
+                    turn++;
+                    currentImg.setSelected(true);
                 }
             }
         });

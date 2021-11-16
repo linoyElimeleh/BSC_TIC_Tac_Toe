@@ -195,4 +195,15 @@
         tools:layout_editor_absoluteX="21dp"
         tools:layout_editor_absoluteY="47dp" />
 
+    <Button
+        android:id="@+id/main_button_newgame"
+        android:layout_width="115dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="new game"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_turn_score" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
